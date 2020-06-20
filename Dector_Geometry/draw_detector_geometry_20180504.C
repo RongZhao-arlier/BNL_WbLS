@@ -136,6 +136,7 @@
    latex.DrawLatex(300,310,"S_{6}");
 
   c0->Print("geoxy.eps");
+  c0->Print("geoxy.pdf");
 
   // now draw the geometry in x-z plane
   TCanvas* c1 = new TCanvas("1ton_geo_xz","",600,600);
@@ -248,6 +249,7 @@
   }
   legHodoXZ->Draw();
   c1->Print("geoxz.eps");
+  c1->Print("geoxz.pdf");
 
   // now draw the geometry in y-z plane
   TCanvas* c2 = new TCanvas("1ton_geo_yz","",600,600);
@@ -309,6 +311,7 @@
   }
   legHodoYZ->Draw();
   c2->Print("geoyz.eps");
+  c2->Print("geoyz.pdf");
 
 //  TCanvas* c3 = new TCanvas("1ton_geo_XY","",600,600);  
   
