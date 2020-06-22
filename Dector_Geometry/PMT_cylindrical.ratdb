@@ -1,0 +1,224 @@
+{
+name: "PMT",
+index: "r7723",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S0",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S0",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S1",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S1",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S2",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S2",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S3",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S3",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S4",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S4",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S5",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S5",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S6",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S6",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
+
+{
+name: "PMT",
+index: "r7723_S7",
+valid_begin: [0,0],
+valid_end: [0,0],
+
+construction: "cylindrical",
+
+case_material: "teflon_black",
+dynode_material: "stainless_steel",
+glass_material: "glass",
+pmt_vacuum_material: "pmt_vacuum", // dilute air
+photocathode_surface: "photocathode_r7723_S7",
+mirror_surface: "mirror",
+dynode_surface: "stainless_steel",
+
+case_thickness: 0.5, // mm
+glass_thickness: 2.0, // mm
+
+pmt_radius: 26.0, //mm
+pmt_height: 56.0, //mm half-lenght
+photocathode_radius: 23.0, //mm
+
+}
