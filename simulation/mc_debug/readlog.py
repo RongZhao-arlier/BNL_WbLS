@@ -8,7 +8,7 @@ h_zcd = ROOT.TH1D("z_cd","final z in cd" ,200 ,-475.,775 )
 h_zacryb = ROOT.TH1D("z_acry","final z in bottom acrylic" ,25 ,-500.4,-475 )
 h_zoc = ROOT.TH1D("z_oc","final z in optical cookie" ,10 ,-502.4,-500.4 )
 h_zpmt = ROOT.TH1D("z_pmt","final z in pmt" ,50 ,-614.4,-502.4 )
-with open("tmp.txt","r") as f:
+with open("tmp5m.txt","r") as f:
 	for line in f.readlines():
 		line=line.strip('\n')
 		linelist=line.split()
