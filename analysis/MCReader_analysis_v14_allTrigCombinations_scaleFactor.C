@@ -219,7 +219,16 @@ oltree->Branch("brhy2", &hy2, "hy2[8]/F");
 npedecaytree->Branch("pmtdecaynpes", &pmtdecaynpe, "pmtdecaynpe[8]/D");
     foutroot->cd();
     //input muons's momentum and angles
+    TH1F* hMuStopz_all;
+    TH1F* hMuStopz_coincidence;
+    TH1F* hMuStopz_topcoincidence;
+    TH1F* hMuStopz_botcoincidence;
+    TH1F* hMuStopz_tbcoincidence;
     TH1F* hMuMomentum[nbTrigs];
+    TH1F* hMuMomentum_all;
+    TH1F* hMuMomentum_decay;
+    TH1F* hMuMomentum_hodotrig;
+    TH1F* hMuMomentum_coincidence;
     TH1F* hMuPAngle[nbTrigs];
     TH1F* hMuAAngle[nbTrigs];
     TH1F* hMuAAngletrigger;
@@ -250,6 +259,34 @@ npedecaytree->Branch("pmtdecaynpes", &pmtdecaynpe, "pmtdecaynpe[8]/D");
         hhodoXYtrigger[j]->SetXTitle("X (mm)");
         hhodoXYtrigger[j]->SetYTitle("Y (mm)");
 	}
+        hMuStopz_all = new TH1F("hMuStopz_all","",60,-600,1000);
+        hMuStopz_all->SetXTitle("Stopz position (mm)");
+        hMuStopz_all->SetYTitle("Counts");
+        hMuStopz_coincidence = new TH1F("hMuStopz_coincidence","",60,-600,1000);
+        hMuStopz_coincidence->SetXTitle("Stopz position (mm)");
+        hMuStopz_coincidence->SetYTitle("Counts");
+        hMuStopz_topcoincidence = new TH1F("hMuStopz_topcoincidence","",60,-600,1000);
+        hMuStopz_topcoincidence->SetXTitle("Stopz position (mm)");
+        hMuStopz_topcoincidence->SetYTitle("Counts");
+        hMuStopz_botcoincidence = new TH1F("hMuStopz_botcoincidence","",60,-600,1000);
+        hMuStopz_botcoincidence->SetXTitle("Stopz position (mm)");
+        hMuStopz_botcoincidence->SetYTitle("Counts");
+        hMuStopz_tbcoincidence = new TH1F("hMuStopz_tbcoincidence","",60,-600,1000);
+        hMuStopz_tbcoincidence->SetXTitle("Stopz position (mm)");
+        hMuStopz_tbcoincidence->SetYTitle("Counts");
+
+        hMuMomentum_all = new TH1F("hMuMomentum_all","",100,0,5000);
+        hMuMomentum_all->SetXTitle("Momentum (MeV/c)");
+        hMuMomentum_all->SetYTitle("Counts");
+        hMuMomentum_decay = new TH1F("hMuMomentum_decay","",100,0,1000);
+        hMuMomentum_decay->SetXTitle("Momentum (MeV/c)");
+        hMuMomentum_decay->SetYTitle("Counts");
+        hMuMomentum_hodotrig = new TH1F("hMuMomentum_hodotrig","",100,0,1000);
+        hMuMomentum_hodotrig->SetXTitle("Momentum (MeV/c)");
+        hMuMomentum_hodotrig->SetYTitle("Counts");
+        hMuMomentum_coincidence = new TH1F("hMuMomentum_coincidence","",100,0,5000);
+        hMuMomentum_coincidence->SetXTitle("Momentum (MeV/c)");
+        hMuMomentum_coincidence->SetYTitle("Counts");
     for(int j=0;j<nbTrigs;j++){
         sprintf(hName,"hMuMomentum_%sTrig",strig[j].c_str());
         hMuMomentum[j] = new TH1F(hName,"",100,0,5000);
@@ -438,6 +475,7 @@ npedecaytree->Branch("pmtdecaynpes", &pmtdecaynpe, "pmtdecaynpe[8]/D");
     // total charge from all PMTs
     TH1F* hTotalCharge[nbTrigs]; // total charge of all pmts in npe
     TH1F* hTotalChargeTop[nbTrigs]; // total charge of top pmts in npe
+    TH2F* hTotalChargeratio_stopz[nbTrigs]; 
     TH1F* hTotalChargeBottom[nbTrigs]; // total charge of bottom pmts in npe
     TH1F* hNpeRatio[nbTrigs]; // charge ratio: total charge in top PMTs over total charge in ALL PMTs, 
 	                          // weighted by number of PMTs.
@@ -446,6 +484,10 @@ npedecaytree->Branch("pmtdecaynpes", &pmtdecaynpe, "pmtdecaynpe[8]/D");
         hTotalCharge[j] = new TH1F(hName,"",1000,0,1000);
         hTotalCharge[j]->SetXTitle("Number of detected photons");
         hTotalCharge[j]->SetYTitle("Counts");
+        sprintf(hName,"hTotalChargeratio_stopz_%sTrig",strig[j].c_str());
+        hTotalChargeratio_stopz[j] = new TH2F(hName,"",100,0,1,160,-600,1000);
+        hTotalChargeratio_stopz[j]->SetXTitle("NPE top/bot");
+        hTotalChargeratio_stopz[j]->SetYTitle("Stopz[mm]");
         sprintf(hName,"hTotalChargeTop_%sTrig",strig[j].c_str());
         hTotalChargeTop[j] = new TH1F(hName,"",100,0,40);
         hTotalChargeTop[j]->SetXTitle("Number of detected photons");
@@ -837,7 +879,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
                 //hEvtTime_multiTrig->Fill(eventTime);
             //}
             // through going triggers
-
+            hMuMomentum_all->Fill(TMath::Sqrt(MomentumSquare));
             if( myTriggerEdep[2]==0 && myTriggerEdep[0]>0 && myTriggerEdep[3]>0 && myTriggerEdep[1]>0 ){
                 trigcnts_hodo++;
                 if(myTriggerEdep[4]>0. && myTriggerEdep[5]>0.){
@@ -881,6 +923,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
                     hTrigTime[trigindex]->Fill(eventStartTime[trigindex]);
                     if(mydecayflag==1)hDecayTime[trigindex]->Fill(decaytime);  //rong zhao
                     if(mydecayflag==1)hDecayTime_all->Fill(decaytime);  //rong zhao
+
                     break;
                 }
             }
@@ -962,6 +1005,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
             for(int index=0; index<nbTrigs; index++){
                 if(istrigger[index]==true){
                     //hMuMomentum[index]->Fill(TMath::Sqrt(MomentumSquare));
+
                     hMuPAngle[index]->Fill(polarAngle);
                     hMuAAngle[index]->Fill(azimuthalAngle);
                     for(int psid=0; psid<6; psid++){
@@ -1022,7 +1066,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 			}
 			lasttime=iTime;
 			//hPMTPhotonTimeSpannpe[pmtID][0]->Fill(iTime,iCharge);
-                    if(iTime>2500 || (iCharge<0.0005 && iphoton==0)) {continue;} //rong modified,  for fitting MC, the cut should not be applied here. 
+                    if(iTime>2500 || (iCharge<0.5 && iphoton==0)) {continue;} //rong modified,  for fitting MC, the cut should not be applied here. 
                     pulseTimeInPMTs1[pmtID].push_back(iTime);
                     pulseChargeInPMTs1[pmtID].push_back(iCharge);
 		    totQ1 += iCharge;
@@ -1062,6 +1106,8 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
                 }//end of getting photons in one pmt
 		for(int trigindex=0; trigindex<nbTrigs; trigindex++){
 		    if(istrigger[trigindex]==true){
+            hMuMomentum_hodotrig->Fill(TMath::Sqrt(MomentumSquare));
+            if(mydecayflag==1)hMuMomentum_decay->Fill(TMath::Sqrt(MomentumSquare));
 			if(firstphotonflag==1){
 			    hPMTNpeVsTime[pmtID][trigindex]->Fill(thispmt_charge[pmtID], firstphotontime);							
 			}
@@ -1221,6 +1267,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 		int coincidence_flag=0;
 		float coincidence_time=0;
 	    for(int trigindex=0; trigindex<nbTrigs; trigindex++){
+            hMuStopz_all->Fill(stopz);
                 for(int ngroup = 0; ngroup<7; ngroup++){
                     for(int nbpulseS0=0; nbpulseS0<pulseTimeInPMTs1[ngroup].size(); nbpulseS0++){
                         for(int pmtid=ngroup+1;pmtid<8;pmtid++){
@@ -1243,8 +1290,17 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
                                 if(ngroup==4) hPulseTimeDiffToS4[pmtid-1-ngroup][trigindex]->Fill( dT );
                                 if(ngroup==5) hPulseTimeDiffToS5[pmtid-1-ngroup][trigindex]->Fill( dT );
                                 if(ngroup==6) hPulseTimeDiffToS6[pmtid-1-ngroup][trigindex]->Fill( dT );
-				if(dT<100&&corrt1>100&&corrt2>100){
+                                int coincidence_tag1=-1;
+                                int coincidence_tag2=-1;
+                                //hMuStopz_all->Fill(stopz);
+				if(fabs(dT)<50&&corrt1>100&&corrt2>100){
+                                    coincidence_tag1=(ngroup%4)*(ngroup%5);
+                                    coincidence_tag2=(pmtid%4)*(pmtid%5);
                                     coincidence_flag=1;
+                                    hMuStopz_coincidence->Fill(stopz);
+                                    if(coincidence_tag1==0&&coincidence_tag2==0)hMuStopz_topcoincidence->Fill(stopz);
+                                    else if(coincidence_tag1*coincidence_tag2==0)hMuStopz_tbcoincidence->Fill(stopz);
+                                    if(coincidence_tag1>0&&coincidence_tag2>0)hMuStopz_botcoincidence->Fill(stopz);
                                     coincidence_time=(corrt1+corrt2)*.5;
                                     //hcoincidence_npe[pmtid]->Fill(pulseChargeInPMTs1[pmtid][nbpulseS1]);
                                 }
@@ -1256,6 +1312,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 		//fill the reconstruncted time histograms.
 		if(coincidence_time>0)hcoincidence_time->Fill(coincidence_time);
 		if(coincidence_time>100){   //fill the nPE histogram of slected decay events.
+            hMuMomentum_coincidence->Fill(TMath::Sqrt(MomentumSquare));
             for(int pmtid=0;pmtid<8;pmtid++){
                 //for(int nbpulseS1=0; nbpulseS1<pulseTimeInPMTs1[pmtid].size(); nbpulseS1++){
                 //    hcoincidence_npe[pmtid]->Fill(pulseChargeInPMTs1[pmtid][nbpulseS1]); 
@@ -1270,6 +1327,8 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
             for(int trigindex=0; trigindex<nbTrigs; trigindex++){
                 if(coincidence_time>100){
                     hMuMomentum[trigindex]->Fill(TMath::Sqrt(MomentumSquare));
+                    
+                    hTotalChargeratio_stopz[trigindex]->Fill(totQ_top1*1./(totQ_bot1+totQ_top1),stopz);
                     hTotalChargeTop[trigindex]->Fill(totQ_top1);
                      hTotalChargeBottom[trigindex]->Fill(totQ_bot1);}
                 istrigger[trigindex]=false;
@@ -1284,6 +1343,15 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 
 	//Now beging writing histograms in the output root file
     foutroot->cd();
+    hMuStopz_all->Write();
+    hMuStopz_tbcoincidence->Write();
+    hMuStopz_topcoincidence->Write();
+    hMuStopz_coincidence->Write();
+    hMuStopz_botcoincidence->Write();
+    hMuMomentum_all->Write();
+    hMuMomentum_decay->Write();
+    hMuMomentum_hodotrig->Write();
+    hMuMomentum_coincidence->Write();
     std::cout<<"Done reading files, now writting to ROOT file ..."<<std::endl;
 	dir[0]->cd();
 	//plastic scintillators (hodo detectors)
@@ -1329,6 +1397,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 	cMuonInfo->Divide(2,1);
 	cMuonInfo->cd(2);
 	TLegend* legMuonAngles = new TLegend(0.6,0.3,0.9,0.5);
+
 	for(int j=0; j<nbTrigs; j++){
             dir[j]->cd();
 	    cMuonInfo->cd(1); 
@@ -1392,6 +1461,7 @@ pmtattsac[ii]=pmtatts[ii]*pmtattacry[ii]*pmtattcookie[ii];
 	    dir[j]->cd();
 	    hTotalCharge[j]->Write();
 	    hTotalChargeTop[j]->Write();
+        hTotalChargeratio_stopz[j]->Write();
 	    hTotalChargeBottom[j]->Write();
 	    hNpeRatio[j]->Write();	
             hDecayZ[j]->Write();
